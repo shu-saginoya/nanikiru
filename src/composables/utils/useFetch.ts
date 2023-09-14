@@ -8,7 +8,6 @@ export const useFetch = (url: string) => {
     .then((res) => res.json())
     .then((json) => {
       data.value = json
-      console.log(data.value)
     })
     .catch((err) => (error.value = err))
 
