@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import SelectArea from '@/components/SelectArea.vue'
+import RegionalSelection from '@/components/blocks/RegionalSelection.vue'
+import ResultDisplay from '@/components/blocks/ResultDisplay.vue'
 </script>
 
 <template>
   <main>
-    <SelectArea></SelectArea>
+    <RegionalSelection></RegionalSelection>
+    <ResultDisplay></ResultDisplay>
   </main>
 </template>
