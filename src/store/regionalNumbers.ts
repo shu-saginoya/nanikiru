@@ -1,20 +1,23 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useLocalStorage } from '@/composables/utils/useLocalStorage'
+
 import type { RegionalList } from '@/types/regional'
 
 const keyName = 'regionalNumbers'
 const { get, set } = useLocalStorage(keyName)
 
-export const useRegionalStore = defineStore('regional', () => {
+export const useRegionalNumbersStore = defineStore('regionalNumbers', () => {
   const regionalList = ref<RegionalList>()
 
-  const getRegionalList = (): RegionalList => {
-    return regionalList.value
-  }
+  const getRegionalList = (): RegionalList => regionalList.value
 
   const setRegionalList = (value: RegionalList) => {
-    regionalList.value = value
+    if (value?.length === 3) {
+      regionalList.value = value
+    } else {
+      regionalList.value = undefined
+    }
   }
 
   const saveRegional = () => {
@@ -26,6 +29,7 @@ export const useRegionalStore = defineStore('regional', () => {
   }
 
   return {
+    regionalList,
     getRegionalList,
     setRegionalList,
     loadRegional,
