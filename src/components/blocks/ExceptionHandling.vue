@@ -2,7 +2,7 @@ s
 <script setup lang="ts">
 defineProps<{
   flag: boolean
-  error: Error | null
+  error: Error | null | undefined
 }>()
 </script>
 
