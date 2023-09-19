@@ -1,7 +1,7 @@
 import { ref, readonly } from 'vue'
 
 export const useFetch = (url: string) => {
-  const data = ref<any>(null)
+  const data = ref(null)
   const error = ref<Error | null>(null)
 
   fetch(url)
