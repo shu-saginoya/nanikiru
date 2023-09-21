@@ -29,6 +29,6 @@ export const useJmaArea = () => {
     class10s: readonly(class10s),
     class15s: readonly(class15s),
     class20s: readonly(class20s),
-    error: readonly(error)
+    error
   }
 }
