@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import RegionalSelection from '@/components/blocks/RegionalSelection.vue'
-import ResultDisplay from '@/components/blocks/ResultDisplay.vue'
+import StateDisplay from '@/components/organisms/StateDisplay.vue'
+import ResultDisplay from '@/components/organisms/ResultDisplay.vue'
 </script>
 
 <template>
   <main>
-    <RegionalSelection></RegionalSelection>
+    <StateDisplay></StateDisplay>
     <ResultDisplay></ResultDisplay>
   </main>
 </template>

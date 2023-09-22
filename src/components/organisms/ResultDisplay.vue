@@ -6,15 +6,15 @@ import { useRegionalNumbersStore } from '@/store/regionalNumbers'
 
 import ExceptionHandling from '@/components/blocks/ExceptionHandling.vue'
 
-const { regionalList } = storeToRefs(useRegionalNumbersStore())
+const { regionalLv2, regionalLv3 } = storeToRefs(useRegionalNumbersStore())
 
 const error = ref<Error | null>()
 const dateTime = ref()
 const weathers = ref()
 const temps = ref()
 const update = (): void => {
-  if (regionalList.value) {
-    const forecast = useJmaForecast(regionalList.value[1], regionalList.value[2])
+  if (regionalLv2.value && regionalLv3.value) {
+    const forecast = useJmaForecast(regionalLv2.value, regionalLv3.value)
     error.value = forecast.error.value
     dateTime.value = forecast.dateTime
     weathers.value = forecast.weathers
@@ -28,16 +28,15 @@ const update = (): void => {
 }
 update()
 
-watch(regionalList, () => {
+watch(regionalLv3, () => {
   update()
 })
 </script>
 
 <template>
-  <ExceptionHandling :flag="Boolean(!error)" :error="error">
-    <pre>{{ dateTime }}</pre>
-    <pre>{{ weathers }}</pre>
-    <pre>{{ temps }}</pre>
-    <template #else><p>情報がありません</p></template>
-  </ExceptionHandling>
+  <section>
+    <p>気温32℃</p>
+    <p>Tシャツ</p>
+    <p>晴れのちくもり</p>
+  </section>
 </template>

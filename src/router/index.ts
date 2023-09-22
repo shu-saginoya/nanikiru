@@ -8,6 +8,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/select-regional',
+      name: 'select-regional',
+      component: () => import('@/views/SelectRegionalView.vue')
     }
   ]
 })
