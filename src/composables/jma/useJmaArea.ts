@@ -1,7 +1,7 @@
 import { ref, watch, readonly } from 'vue'
 import { useFetch } from '@/composables/utils/useFetch'
 
-import type { Areas } from '@/types/regional'
+import type { Areas } from '@/types/jmaAreas'
 
 export const useJmaArea = () => {
   const url = 'https://www.jma.go.jp/bosai/common/const/area.json'
