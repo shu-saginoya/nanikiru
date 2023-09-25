@@ -1,42 +1,32 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { storeToRefs } from 'pinia'
+import { ref, computed } from 'vue'
 import { useJmaForecast } from '@/composables/jma/useJmaForecast'
-import { useRegionalNumbersStore } from '@/store/regionalNumbers'
+import { useDateFormat } from '@/composables/utils/dateFormat'
 
-import ExceptionHandling from '@/components/blocks/ExceptionHandling.vue'
+const { error, dateTime, weathers, temps } = useJmaForecast()
 
-const { regionalLv2, regionalLv3 } = storeToRefs(useRegionalNumbersStore())
-
-const error = ref<Error | null>()
-const dateTime = ref()
-const weathers = ref()
-const temps = ref()
-const update = (): void => {
-  if (regionalLv2.value && regionalLv3.value) {
-    const forecast = useJmaForecast(regionalLv2.value, regionalLv3.value)
-    error.value = forecast.error.value
-    dateTime.value = forecast.dateTime
-    weathers.value = forecast.weathers
-    temps.value = forecast.temps
-  } else {
-    error.value = {
-      name: '',
-      message: '地域が指定されていません'
-    }
-  }
+const dateNumbers = {
+  today: 0,
+  tomorrow: 1,
+  dayAfterTomorrow: 2
 }
-update()
+const dateSelection = ref<number>(dateNumbers.today)
 
-watch(regionalLv3, () => {
-  update()
+const date = computed(() => {
+  if (dateTime.value) {
+    return useDateFormat(dateTime.value[dateSelection.value]).formatJa
+  } else {
+    return undefined
+  }
 })
 </script>
 
 <template>
   <section>
-    <p>気温32℃</p>
+    <p v-if="error">天気予報の取得に失敗しました。</p>
+    <p v-if="date">{{ date }}</p>
+    <pre>{{ temps }}</pre>
     <p>Tシャツ</p>
-    <p>晴れのちくもり</p>
+    <p v-if="weathers">{{ weathers[dateSelection] }}</p>
   </section>
 </template>

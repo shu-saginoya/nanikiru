@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useJmaArea } from '@/composables/jma/useJmaArea'
-import { useRegionalNumbersStore } from '@/store/regionalNumbers'
+import { useRegionalsStore } from '@/store/regionals'
 
-const { offices, error } = useJmaArea()
-const { regionalLv2 } = storeToRefs(useRegionalNumbersStore())
+const { regionalLv2, regionalLv3 } = storeToRefs(useRegionalsStore())
 </script>
 
 <template>
   <section>
-    <p>千葉県流山市</p>
+    <p v-if="regionalLv2 && regionalLv3">{{ regionalLv2.name }} {{ regionalLv3.name }}</p>
+    <p v-else>地域が選択されていません</p>
     <router-link to="select-regional">地域を変更する</router-link>
-    <p>9月22日金曜日</p>
   </section>
 </template>
