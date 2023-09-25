@@ -1,29 +1,34 @@
 import { ref, watch, readonly } from 'vue'
 import { useFetch } from '@/composables/utils/useFetch'
+import { useRegionalsStore } from '@/store/regionals'
 
-import type { Forecast, TimeSeries } from '@/types/jmaForecast'
+import type { ForecastList } from '@/types/jmaForecast'
 
-export const useJmaForecast = (preKey: string, areaKey: string) => {
+export const useJmaForecast = () => {
+  const { regionalLv2, regionalLv3 } = useRegionalsStore()
+
   const accessPoint = 'https://www.jma.go.jp/bosai/forecast/data/forecast/'
-  const url = accessPoint + preKey + '.json'
+  const url = accessPoint + regionalLv2?.key + '.json'
   const { data, error } = useFetch(url)
 
   const dateTime = ref<string[]>()
   const weathers = ref<string[]>()
-  const temps = ref<TimeSeries>()
+  const temps = ref()
   watch(data, () => {
     if (data.value) {
-      const forecast: Forecast = data.value[0]
-      dateTime.value = forecast.timeSeries[0].timeDefines
+      const forecast: ForecastList = data.value
+      const latestForecast = forecast[0]
 
-      for (const item of forecast.timeSeries[0].areas) {
-        if (item.area.code === areaKey) {
+      dateTime.value = latestForecast.timeSeries[0].timeDefines
+
+      for (const item of latestForecast.timeSeries[0].areas) {
+        if (item.area.code === regionalLv3?.key) {
           weathers.value = item.weathers
           break
         }
       }
 
-      temps.value = forecast.timeSeries[2]
+      temps.value = latestForecast.timeSeries[2].areas
     }
   })
 
