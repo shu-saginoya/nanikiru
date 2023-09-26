@@ -1,17 +1,17 @@
 import { ref, watch, readonly } from 'vue'
 import { useFetch } from '@/composables/utils/useFetch'
 
-import type { Areas } from '@/types/jmaAreas'
+import type { Areas, Area } from '@/types/jmaAreas'
 
 export const useJmaArea = () => {
   const url = 'https://www.jma.go.jp/bosai/common/const/area.json'
   const { data, error } = useFetch(url)
 
-  const centers = ref()
-  const offices = ref()
-  const class10s = ref()
-  const class15s = ref()
-  const class20s = ref()
+  const centers = ref<Area[]>()
+  const offices = ref<Area[]>()
+  const class10s = ref<Area[]>()
+  const class15s = ref<Area[]>()
+  const class20s = ref<Area[]>()
   watch(data, () => {
     if (data.value) {
       const areas: Areas = data.value

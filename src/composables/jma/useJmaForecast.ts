@@ -2,7 +2,7 @@ import { ref, watch, readonly } from 'vue'
 import { useFetch } from '@/composables/utils/useFetch'
 import { useRegionalsStore } from '@/store/regionals'
 
-import type { ForecastList } from '@/types/jmaForecast'
+import type { ForecastList, AreaTypeC } from '@/types/jmaForecast'
 
 export const useJmaForecast = () => {
   const { regionalLv2, regionalLv3 } = useRegionalsStore()
@@ -13,7 +13,7 @@ export const useJmaForecast = () => {
 
   const dateTime = ref<string[]>()
   const weathers = ref<string[]>()
-  const temps = ref()
+  const temps = ref<AreaTypeC[]>()
   watch(data, () => {
     if (data.value) {
       const forecast: ForecastList = data.value
