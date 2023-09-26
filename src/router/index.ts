@@ -10,6 +10,11 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/about',
+      name: 'about',
+      component: () => import('@/views/AboutView.vue')
+    },
+    {
       path: '/select-regional',
       name: 'select-regional',
       component: () => import('@/views/SelectRegionalView.vue')
