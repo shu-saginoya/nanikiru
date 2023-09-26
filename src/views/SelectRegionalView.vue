@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useJmaArea } from '@/composables/jma/useJmaArea'
 import { useRegionalsStore } from '@/store/regionals'
 import { useVisibleSeveral } from '@/composables/utils/useVisibleSeveral'
-import { useRouter } from 'vue-router'
 
 const { centers, offices, class10s, error } = useJmaArea()
 const { regionalLv1, regionalLv2 } = storeToRefs(useRegionalsStore())
