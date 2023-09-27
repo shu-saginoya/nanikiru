@@ -1,15 +1,48 @@
-export type Area = {
-  name: string
-  enName: string
-  kana?: string
-  officeName?: string
-  parent?: string
-  children?: string[]
+export type AreaCenters = {
+  [key: string]: {
+    name: string
+    enName: string
+    officeName: string
+    children: string[]
+  }[]
+}
+export type AreaOffices = {
+  [key: string]: {
+    name: string
+    enName: string
+    officeName: string
+    parent: string
+    children: string[]
+  }[]
+}
+export type AreaClass10s = {
+  [key: string]: {
+    name: string
+    enName: string
+    parent: string
+    children: string[]
+  }[]
+}
+export type AreaClass15s = {
+  [key: string]: {
+    name: string
+    enName: string
+    parent: string
+    children: string[]
+  }[]
+}
+export type AreaClass20s = {
+  [key: string]: {
+    name: string
+    enName: string
+    kana: string
+    parent: string
+  }[]
 }
 export type Areas = {
-  centers: Area[]
-  offices: Area[]
-  class10s: Area[]
-  class15s: Area[]
-  class20s: Area[]
+  centers: AreaCenters
+  offices: AreaOffices
+  class10s: AreaClass10s
+  class15s: AreaClass15s
+  class20s: AreaClass20s
 }
