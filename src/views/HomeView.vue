@@ -1,11 +1,55 @@
 <script setup lang="ts">
-import StateDisplay from '@/components/organisms/StateDisplay.vue'
-import ResultDisplay from '@/components/organisms/ResultDisplay.vue'
+import { ref, computed, watchEffect } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useRegionalsStore } from '@/store/regionals'
+import { useJmaArea } from '@/composables/jma/useJmaArea'
+import { useJmaForecast } from '@/composables/jma/useJmaForecast'
+import { useDateFormat } from '@/composables/utils/useDateFormat'
+
+const { offices } = useJmaArea()
+const { error, dateTime, weathers, temps } = useJmaForecast()
+const { regionalLv2, regionalLv3 } = storeToRefs(useRegionalsStore())
+
+const dateNumbers = {
+  today: 0,
+  tomorrow: 1,
+  dayAfterTomorrow: 2
+}
+const dateSelection = ref<number>(dateNumbers.today)
+
+const date = computed(() => {
+  if (dateTime.value) {
+    return useDateFormat(dateTime.value[dateSelection.value]).formatJa
+  } else {
+    return undefined
+  }
+})
+
+const areaNumber = ref(0)
+watchEffect(() => {
+  if (offices.value && regionalLv2.value && regionalLv3.value) {
+    const key = Number(regionalLv2.value.key)
+    const children = offices.value[key].children
+    if (children) {
+      areaNumber.value = children.indexOf(regionalLv3.value.key, 0)
+    }
+  }
+})
 </script>
 
 <template>
   <main>
-    <StateDisplay></StateDisplay>
-    <ResultDisplay></ResultDisplay>
+    <section>
+      <p v-if="regionalLv2 && regionalLv3">{{ regionalLv2.name }} {{ regionalLv3.name }}</p>
+      <p v-else>地域が選択されていません</p>
+      <router-link to="select-regional">地域を変更する</router-link>
+    </section>
+    <section>
+      <p v-if="error">天気予報の取得に失敗しました。</p>
+      <p v-if="date">{{ date }}</p>
+      <p v-if="temps">{{ temps[areaNumber].area.name }}</p>
+      <p>Tシャツ</p>
+      <p v-if="weathers">{{ weathers[dateSelection] }}</p>
+    </section>
   </main>
 </template>

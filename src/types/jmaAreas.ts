@@ -4,7 +4,7 @@ export type AreaCenters = {
     enName: string
     officeName: string
     children: string[]
-  }[]
+  }
 }
 export type AreaOffices = {
   [key: string]: {
@@ -13,7 +13,7 @@ export type AreaOffices = {
     officeName: string
     parent: string
     children: string[]
-  }[]
+  }
 }
 export type AreaClass10s = {
   [key: string]: {
@@ -21,7 +21,7 @@ export type AreaClass10s = {
     enName: string
     parent: string
     children: string[]
-  }[]
+  }
 }
 export type AreaClass15s = {
   [key: string]: {
@@ -29,7 +29,7 @@ export type AreaClass15s = {
     enName: string
     parent: string
     children: string[]
-  }[]
+  }
 }
 export type AreaClass20s = {
   [key: string]: {
@@ -37,7 +37,7 @@ export type AreaClass20s = {
     enName: string
     kana: string
     parent: string
-  }[]
+  }
 }
 export type Areas = {
   centers: AreaCenters

@@ -7,8 +7,8 @@ import { useVisibleSeveral } from '@/composables/utils/useVisibleSeveral'
 
 const { centers, offices, class10s, error } = useJmaArea()
 const { regionalLv1, regionalLv2 } = storeToRefs(useRegionalsStore())
-const { setRegionalLv1, setRegionalLv2, setRegionalLv3, saveRegional } = useRegionalsStore()
-const { visible, up, down } = useVisibleSeveral()
+const { setRegionalLv1, setRegionalLv2, setRegionalLv3 } = useRegionalsStore()
+const { visible, next, prev } = useVisibleSeveral()
 const router = useRouter()
 
 if (error.value) {
@@ -18,15 +18,14 @@ if (error.value) {
 
 const selectAction1 = (key: string, name: string) => {
   setRegionalLv1(key, name)
-  up()
+  next()
 }
 const selectAction2 = (key: string, name: string) => {
   setRegionalLv2(key, name)
-  up()
+  next()
 }
 const selectAction3 = (key: string, name: string) => {
   setRegionalLv3(key, name)
-  saveRegional()
   router.push('/')
 }
 </script>
@@ -52,7 +51,7 @@ const selectAction3 = (key: string, name: string) => {
           </li>
         </template>
         <li>
-          <button type="button" @click="down()">もどる</button>
+          <button type="button" @click="prev()">もどる</button>
         </li>
       </ul>
     </section>
@@ -66,7 +65,7 @@ const selectAction3 = (key: string, name: string) => {
           </li>
         </template>
         <li>
-          <button type="button" @click="down()">もどる</button>
+          <button type="button" @click="prev()">もどる</button>
         </li>
       </ul>
     </section>
