@@ -41,6 +41,7 @@ export const useRegionalsStore = defineStore('regionals', () => {
   }
   const setRegionalLv3 = (key: string, name: string) => {
     regionalLv3.value = { key, name }
+    saveRegional()
   }
   const initRegional = (): void => {
     const savedData = get()
@@ -68,7 +69,6 @@ export const useRegionalsStore = defineStore('regionals', () => {
     setRegionalLv1,
     setRegionalLv2,
     setRegionalLv3,
-    initRegional,
-    saveRegional
+    initRegional
   }
 })
