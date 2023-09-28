@@ -1,40 +1,17 @@
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRegionalsStore } from '@/store/regionals'
-import { useJmaArea } from '@/composables/jma/useJmaArea'
+import { useForecastStore } from '@/store/forecast'
 import { useJmaForecast } from '@/composables/jma/useJmaForecast'
 import { useDateFormat } from '@/composables/utils/useDateFormat'
 
-const { offices } = useJmaArea()
-const { error, dateTime, weathers, temps } = useJmaForecast()
 const { regionalLv2, regionalLv3 } = storeToRefs(useRegionalsStore())
+const { date, weathers, temps, tempArea } = storeToRefs(useForecastStore())
 
-const dateNumbers = {
-  today: 0,
-  tomorrow: 1,
-  dayAfterTomorrow: 2
+const { error } = useJmaForecast()
+if (error.value) {
+  console.error(error.value.message)
 }
-const dateSelection = ref<number>(dateNumbers.today)
-
-const date = computed(() => {
-  if (dateTime.value) {
-    return useDateFormat(dateTime.value[dateSelection.value]).formatJa
-  } else {
-    return undefined
-  }
-})
-
-const areaNumber = ref(0)
-watchEffect(() => {
-  if (offices.value && regionalLv2.value && regionalLv3.value) {
-    const key = Number(regionalLv2.value.key)
-    const children = offices.value[key].children
-    if (children) {
-      areaNumber.value = children.indexOf(regionalLv3.value.key, 0)
-    }
-  }
-})
 </script>
 
 <template>
@@ -45,11 +22,11 @@ watchEffect(() => {
       <router-link to="select-regional">地域を変更する</router-link>
     </section>
     <section>
-      <p v-if="error">天気予報の取得に失敗しました。</p>
-      <p v-if="date">{{ date }}</p>
-      <p v-if="temps">{{ temps[areaNumber].area.name }}</p>
+      <p v-if="date">{{ useDateFormat(date[0]).formatJa }}</p>
+      <p>{{ tempArea?.name }}</p>
+      <p v-if="temps">{{ temps[0] }}</p>
       <p>Tシャツ</p>
-      <p v-if="weathers">{{ weathers[dateSelection] }}</p>
+      <p v-if="weathers">{{ weathers[0] }}</p>
     </section>
   </main>
 </template>
