@@ -7,15 +7,13 @@ const { get, set } = useLocalStorage(keyName)
 
 export const useRegionalsStore = defineStore('regionals', () => {
   // State
-  type Regional =
-    | {
-        key: string
-        name: string
-      }
-    | undefined
-  const regionalLv1 = ref<Regional>()
-  const regionalLv2 = ref<Regional>()
-  const regionalLv3 = ref<Regional>()
+  type Regional = {
+    key: string
+    name: string
+  }
+  const regionalLv1 = ref<Regional | undefined>()
+  const regionalLv2 = ref<Regional | undefined>()
+  const regionalLv3 = ref<Regional | undefined>()
 
   // Getters
   const isSetAll = computed<boolean>(() => {
