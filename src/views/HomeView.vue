@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRegionalsStore } from '@/store/regionals'
 import { useForecastStore } from '@/store/forecast'
@@ -18,9 +18,13 @@ if (error.value) {
   console.error(error.value.message)
 }
 const { getClothing } = useClothing()
-const clothing = computed(() => {
+const clothing = ref<string[]>()
+const clothingId = ref<number>()
+watch(temps, () => {
   if (temps.value) {
-    return getClothing(Number(temps.value[0]))
+    const result = getClothing(Number(temps.value[0]))
+    clothing.value = result.clothing
+    clothingId.value = result.id
   } else {
     return undefined
   }
@@ -43,6 +47,7 @@ const region = computed<string | undefined>(() => {
       :areaName="tempArea ? tempArea.name : undefined"
       :temps="temps ? temps[0] : undefined"
       :clothing="clothing"
+      :clothingId="clothingId"
       :weathers="weathers ? weathers[0] : undefined"
     ></WeatherForecast>
   </ArticleCard>
