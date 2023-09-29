@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     './index.html',
@@ -8,7 +9,14 @@ module.exports = {
   ],
   darkMode: 'media', // or 'media' or 'class'
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        primary: '#10b981'
+      }
+    },
+    fontFamily: {
+      gabarito: ['Gabarito', 'cursive']
+    }
   },
   variants: {
     extend: {}
