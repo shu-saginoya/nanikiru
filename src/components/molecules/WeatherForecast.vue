@@ -45,13 +45,13 @@ const tempColor = computed(() => {
     <p>{{ date }}</p>
     <hr />
     <p>{{ areaName }}</p>
-    <p :class="tempColor">
-      <span class="text-6xl font-bold font-roboto tracking-tighter">{{ temps }}</span>
+    <p class="font-bold tracking-tighter" :class="tempColor">
+      <span class="text-6xl font-roboto">{{ temps }}</span>
       <span class="text-4xl">℃</span>
     </p>
     <p>服装の目安：{{ clothing.join('・') }}</p>
     <div class="px-4">
-      <p class="text-sm text-left">{{ weathersFormat }}</p>
+      <p class="text-sm">{{ weathersFormat }}</p>
     </div>
   </section>
   <section v-else>
