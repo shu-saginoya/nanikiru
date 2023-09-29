@@ -15,7 +15,8 @@ module.exports = {
       }
     },
     fontFamily: {
-      gabarito: ['Gabarito', 'cursive']
+      gabarito: ['Gabarito', 'cursive'],
+      roboto: ['Roboto', 'sans-serif']
     }
   },
   variants: {
