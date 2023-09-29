@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useJmaArea } from '@/composables/jma/useJmaArea'
 import { useRegionalsStore } from '@/store/regionals'
 import { useVisibleSeveral } from '@/composables/utils/useVisibleSeveral'
+import ArticleCard from '@/components/molecules/ArticleCard.vue'
 
 const { centers, offices, class10s, error } = useJmaArea()
 const { regionalLv1, regionalLv2 } = storeToRefs(useRegionalsStore())
@@ -31,8 +32,8 @@ const selectAction3 = (key: string, name: string) => {
 </script>
 
 <template>
-  <main>
-    <section v-show="visible === 0">
+  <ArticleCard>
+    <section v-show="visible === 0" class="text-left">
       <ul>
         <li v-for="(value, key) in centers" :key="String(key)">
           <button type="button" @click="selectAction1(String(key), value.name)">
@@ -41,7 +42,7 @@ const selectAction3 = (key: string, name: string) => {
         </li>
       </ul>
     </section>
-    <section v-show="visible === 1">
+    <section v-show="visible === 1" class="text-left">
       <ul v-if="regionalLv1">
         <template v-for="(value, key) in offices" :key="String(key)">
           <li v-if="value.parent === regionalLv1.key">
@@ -55,7 +56,7 @@ const selectAction3 = (key: string, name: string) => {
         </li>
       </ul>
     </section>
-    <section v-show="visible === 2">
+    <section v-show="visible === 2" class="text-left">
       <ul v-if="regionalLv2">
         <template v-for="(value, key) in class10s" :key="String(key)">
           <li v-if="value.parent === regionalLv2.key">
@@ -69,5 +70,5 @@ const selectAction3 = (key: string, name: string) => {
         </li>
       </ul>
     </section>
-  </main>
+  </ArticleCard>
 </template>
