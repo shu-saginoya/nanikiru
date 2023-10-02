@@ -31,7 +31,7 @@ export const useJmaForecast = () => {
 
       setDate(date[0], date[1])
       setWeathers(weathers[0], weathers[1])
-      setTemps(temps[0], temps[1])
+      setTemps([Number(temps[0]), Number(temps[1])], [Number(temps[2]), Number(temps[3])])
       setTempArea(tempArea.name, tempArea.code)
     }
   })

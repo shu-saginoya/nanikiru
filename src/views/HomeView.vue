@@ -7,7 +7,7 @@ import { useJmaForecast } from '@/composables/jma/useJmaForecast'
 import { useDateFormat } from '@/composables/utils/useDateFormat'
 import ArticleStateArea from '@/components/molecules/ArticleStateArea.vue'
 import ArticleCard from '@/components/molecules/ArticleCard.vue'
-import WeatherForecast from '@/components/molecules/WeatherForecast.vue'
+import SectionForecast from '@/components/molecules/SectionForecast.vue'
 
 const { regionalLv2, regionalLv3 } = storeToRefs(useRegionalsStore())
 const { date, weathers, temps, tempArea } = storeToRefs(useForecastStore())
@@ -24,16 +24,28 @@ const region = computed<string | undefined>(() => {
     return undefined
   }
 })
+const today = 0
+const tomorrow = 1
 </script>
 
 <template>
   <ArticleStateArea :region="region"> </ArticleStateArea>
   <ArticleCard>
-    <WeatherForecast
-      :date="date ? useDateFormat(date[0]).formatJa : undefined"
+    <SectionForecast
+      :date="date ? useDateFormat(date[today]).formatJa : undefined"
       :areaName="tempArea ? tempArea.name : undefined"
-      :temps="temps ? temps[0] : undefined"
-      :weathers="weathers ? weathers[0] : undefined"
-    ></WeatherForecast>
+      :minTemp="temps ? temps[today][0] : undefined"
+      :maxTemp="temps ? temps[today][1] : undefined"
+      :weather="weathers ? weathers[today] : undefined"
+    ></SectionForecast>
+  </ArticleCard>
+  <ArticleCard>
+    <SectionForecast
+      :date="date ? useDateFormat(date[tomorrow]).formatJa : undefined"
+      :areaName="tempArea ? tempArea.name : undefined"
+      :minTemp="temps ? temps[tomorrow][0] : undefined"
+      :maxTemp="temps ? temps[tomorrow][1] : undefined"
+      :weather="weathers ? weathers[tomorrow] : undefined"
+    ></SectionForecast>
   </ArticleCard>
 </template>
