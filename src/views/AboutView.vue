@@ -23,7 +23,10 @@ import ArticleCard from '@/components/molecules/ArticleCard.vue'
       <p>
         また、衣類のイラストは「いらすとや」から利用させていただきました。https://www.irasutoya.com/
       </p>
-      <p>また、アプリ内のアイコンについてはheroiconsからお借りしました。https://heroicons.com/</p>
+      <p>
+        また、アプリ内のアイコンについてはTailwind
+        Toolboxからお借りしました。https://www.tailwindtoolbox.com/
+      </p>
     </section>
   </ArticleCard>
 </template>
