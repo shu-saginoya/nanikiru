@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import router from '@/router'
 import { storeToRefs } from 'pinia'
 import { useRegionalsStore } from '@/store/regionals'
 import { useForecastStore } from '@/store/forecast'
@@ -8,7 +9,6 @@ import { useDateFormat } from '@/composables/utils/useDateFormat'
 import ArticleStateArea from '@/components/molecules/ArticleStateArea.vue'
 import ArticleCard from '@/components/molecules/ArticleCard.vue'
 import SectionForecast from '@/components/molecules/SectionForecast.vue'
-import router from '@/router'
 
 const { regionalLv2, regionalLv3, isSetAll } = storeToRefs(useRegionalsStore())
 const { date, weathers, temps, tempArea } = storeToRefs(useForecastStore())
