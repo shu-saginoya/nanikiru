@@ -66,6 +66,7 @@ const selectAction3 = (key: string, name: string) => {
 </script>
 
 <template>
+  <h2>いちばん近い地域を選んでください</h2>
   <ArticleCard>
     <SectionRegionList v-show="visible === 0" :items="centerItems" :click-action="selectAction1">
     </SectionRegionList>
