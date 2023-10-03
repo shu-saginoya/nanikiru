@@ -12,9 +12,11 @@ export const useDateFormat = (value: string) => {
     return japaneseDays[number]
   }
 
+  const format = `${year}-${month}-${date}`
   const formatJa = `${year}年${month}月${date}日${convertDaysJa(day)}曜日`
 
   return {
+    format,
     formatJa,
     hours
   }
