@@ -2,14 +2,12 @@ import { defineStore } from 'pinia'
 import { ref, readonly } from 'vue'
 
 export const useForecastStore = defineStore('forecast', () => {
-  type Today = string
-  type Tomorrow = string
-  type Contents = [Today, Tomorrow]
-  type Min = number
-  type Max = number
-  type TempsToday = [Min, Max]
-  type TempsTomorrow = [Min, Max]
-  type Temps = [TempsToday, TempsTomorrow]
+  type day1st = string
+  type day2nd = string | undefined
+  type Contents = [day1st, day2nd]
+  type TempDay1st = [number, number]
+  type TempDay2nd = [number, number] | undefined
+  type Temps = [TempDay1st, TempDay2nd]
   type TempArea = {
     name: string
     code: string
@@ -21,14 +19,14 @@ export const useForecastStore = defineStore('forecast', () => {
   const tempArea = ref<TempArea | undefined>()
 
   // Setter
-  const setDate = (today: string, tomorrow: string) => {
-    date.value = [today, tomorrow]
+  const setDate = (day1st: string, day2nd: string) => {
+    date.value = [day1st, day2nd]
   }
-  const setWeathers = (today: string, tomorrow: string) => {
-    weathers.value = [today, tomorrow]
+  const setWeathers = (day1st: string, day2nd: string) => {
+    weathers.value = [day1st, day2nd]
   }
-  const setTemps = (today: TempsToday, tomorrow: TempsTomorrow) => {
-    temps.value = [today, tomorrow]
+  const setTemps = (day1st: TempDay1st, day2nd: TempDay2nd) => {
+    temps.value = [day1st, day2nd]
   }
   const setTempArea = (name: string, code: string) => {
     tempArea.value = { name, code }

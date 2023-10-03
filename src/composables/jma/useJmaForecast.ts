@@ -36,8 +36,13 @@ export const useJmaForecast = () => {
       const tempArea = tempsList[areaNum.value].area
 
       setDate(tempsDate[0], tempsDate[2])
-      setTemps([Number(temps[0]), Number(temps[1])], [Number(temps[2]), Number(temps[3])])
       setTempArea(tempArea.name, tempArea.code)
+
+      if (temps.length === 4) {
+        setTemps([Number(temps[0]), Number(temps[1])], [Number(temps[2]), Number(temps[3])])
+      } else if (temps.length === 2) {
+        setTemps([Number(temps[0]), Number(temps[1])], undefined)
+      }
 
       if (compareDates(tempsDate[0], weathersDate[0])) {
         setWeathers(weathers[0], weathers[1])
