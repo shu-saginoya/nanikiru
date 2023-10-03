@@ -35,20 +35,19 @@ const tomorrow = 1
 </script>
 
 <template>
-  <ArticleStateArea :region="region"> </ArticleStateArea>
+  <ArticleStateArea :region="region" :areaName="tempArea ? tempArea.name : undefined">
+  </ArticleStateArea>
   <ArticleCard>
     <SectionForecast
       :date="date ? useDateFormat(date[today]).formatJa : undefined"
-      :areaName="tempArea ? tempArea.name : undefined"
       :minTemp="temps ? temps[today][0] : undefined"
       :maxTemp="temps ? temps[today][1] : undefined"
       :weather="weathers ? weathers[today] : undefined"
     ></SectionForecast>
   </ArticleCard>
-  <ArticleCard>
+  <ArticleCard v-if="temps && temps[tomorrow]">
     <SectionForecast
       :date="date ? useDateFormat(date[tomorrow]).formatJa : undefined"
-      :areaName="tempArea ? tempArea.name : undefined"
       :minTemp="temps ? temps[tomorrow][0] : undefined"
       :maxTemp="temps ? temps[tomorrow][1] : undefined"
       :weather="weathers ? weathers[tomorrow] : undefined"
