@@ -3,6 +3,7 @@ import { watchEffect } from 'vue'
 import { useTempClass } from '@/composables/utils/useTempClass'
 import { useTextFormat } from '@/composables/utils/useTextFormat'
 import DivTemps from '@/components/molecules/DivTemps.vue'
+import DivClothing from './DivClothing.vue'
 
 const props = defineProps<{
   date?: string
@@ -12,7 +13,7 @@ const props = defineProps<{
   weather?: string
 }>()
 
-const { clothing, color, setTemp } = useTempClass()
+const { clothing, color, image, setTemp } = useTempClass()
 const { fullSpacesToHalf } = useTextFormat()
 
 watchEffect(() => {
@@ -26,7 +27,7 @@ watchEffect(() => {
     <hr />
     <p>{{ areaName }}</p>
     <DivTemps :minTemp="minTemp" :maxTemp="maxTemp"></DivTemps>
-    <p v-if="clothing" :class="color">服装の目安：{{ clothing.join('・') }}</p>
+    <DivClothing :clothing="clothing" :image="image" :color="color"></DivClothing>
     <div class="px-4">
       <p class="text-sm">{{ fullSpacesToHalf(weather) }}</p>
     </div>
