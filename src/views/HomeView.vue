@@ -8,9 +8,15 @@ import { useDateFormat } from '@/composables/utils/useDateFormat'
 import ArticleStateArea from '@/components/molecules/ArticleStateArea.vue'
 import ArticleCard from '@/components/molecules/ArticleCard.vue'
 import SectionForecast from '@/components/molecules/SectionForecast.vue'
+import router from '@/router'
 
-const { regionalLv2, regionalLv3 } = storeToRefs(useRegionalsStore())
+const { regionalLv2, regionalLv3, isSetAll } = storeToRefs(useRegionalsStore())
 const { date, weathers, temps, tempArea } = storeToRefs(useForecastStore())
+
+if (!isSetAll.value) {
+  alert('地域をすべて選択してください')
+  router.push('/select-regional')
+}
 
 const { error } = useJmaForecast()
 if (error.value) {
