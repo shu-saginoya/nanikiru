@@ -21,6 +21,7 @@ export const useJmaForecast = () => {
   const areaNum = ref<number>(0)
 
   watchEffect((): void => {
+    // 後で整理する。また、例外も拾いきるようにする
     if (data.value) {
       const forecast: ForecastList = data.value
       const latestForecast = forecast[0]
@@ -35,19 +36,31 @@ export const useJmaForecast = () => {
       const temps = tempsList[0].temps
       const tempArea = tempsList[areaNum.value].area
 
+      const weathersDateNum = (tempDateNum: number): number => {
+        if (compareDates(weathersDate[0], tempsDate[tempDateNum])) {
+          return 0
+        } else if (compareDates(weathersDate[1], tempsDate[tempDateNum])) {
+          return 1
+        } else if (compareDates(weathersDate[2], tempsDate[tempDateNum])) {
+          return 2
+        } else {
+          return 3
+        }
+      }
+
       setTempArea(tempArea.name, tempArea.code)
 
       if (tempsDate.length >= 4) {
         setForecasts([
           {
             date: tempsDate[0],
-            weather: weathers[0],
+            weather: weathers[weathersDateNum(0)],
             minTemp: Number(temps[0]),
             maxTemp: Number(temps[1])
           },
           {
             date: tempsDate[2],
-            weather: weathers[1],
+            weather: weathers[weathersDateNum(2)],
             minTemp: Number(temps[2]),
             maxTemp: Number(temps[3])
           }
