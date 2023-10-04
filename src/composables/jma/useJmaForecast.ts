@@ -9,7 +9,7 @@ import type { ForecastList, AreaTypeA } from '@/types/jmaForecast'
 export const useJmaForecast = () => {
   // グローバルステートを取得
   const { regionalLv2, regionalLv3 } = storeToRefs(useRegionalsStore())
-  const { setDate, setWeathers, setTemps, setTempArea } = useForecastStore()
+  const { setForecasts, setTempArea } = useForecastStore()
 
   // 気象庁天気予報のアクセスポイントにアクセス
   const accessPoint = 'https://www.jma.go.jp/bosai/forecast/data/forecast/'
@@ -35,19 +35,32 @@ export const useJmaForecast = () => {
       const temps = tempsList[0].temps
       const tempArea = tempsList[areaNum.value].area
 
-      setDate(tempsDate[0], tempsDate[2])
       setTempArea(tempArea.name, tempArea.code)
 
-      if (temps.length === 4) {
-        setTemps([Number(temps[0]), Number(temps[1])], [Number(temps[2]), Number(temps[3])])
-      } else if (temps.length === 2) {
-        setTemps([Number(temps[0]), Number(temps[1])], undefined)
-      }
-
-      if (compareDates(tempsDate[0], weathersDate[0])) {
-        setWeathers(weathers[0], weathers[1])
-      } else if (compareDates(tempsDate[0], weathersDate[1])) {
-        setWeathers(weathers[1], weathers[2])
+      if (tempsDate.length >= 4) {
+        setForecasts([
+          {
+            date: tempsDate[0],
+            weather: weathers[0],
+            minTemp: Number(temps[0]),
+            maxTemp: Number(temps[1])
+          },
+          {
+            date: tempsDate[2],
+            weather: weathers[1],
+            minTemp: Number(temps[2]),
+            maxTemp: Number(temps[3])
+          }
+        ])
+      } else {
+        setForecasts([
+          {
+            date: tempsDate[0],
+            weather: weathers[0],
+            minTemp: Number(temps[0]),
+            maxTemp: Number(temps[1])
+          }
+        ])
       }
     }
   })
