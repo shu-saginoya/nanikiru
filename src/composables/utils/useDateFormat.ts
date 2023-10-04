@@ -2,7 +2,7 @@ export const useDateFormat = (value: string) => {
   const dateObject = new Date(value)
 
   const year = dateObject.getFullYear()
-  const month = dateObject.getMonth()
+  const month = dateObject.getMonth() + 1
   const date = dateObject.getDate()
   const day = dateObject.getDay()
   const hours = dateObject.getHours()
