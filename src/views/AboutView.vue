@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import router from '@/router'
 import ArticleCard from '@/components/molecules/ArticleCard.vue'
 import LinkRouter from '@/components/atoms/LinkRouter.vue'
 import IconBack from '@/components/icons/IconBack.vue'
