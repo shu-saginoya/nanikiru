@@ -4,7 +4,6 @@ import { useRegionalsStore } from '@/store/regionals'
 import LayoutWrapper from '@/components/organisms/LayoutWrapper.vue'
 import HeaderCommon from '@/components/organisms/HeaderCommon.vue'
 import MainCommon from '@/components/organisms/MainCommon.vue'
-import FooterCommon from '@/components/organisms/FooterCommon.vue'
 
 const { initRegional } = useRegionalsStore()
 initRegional()
@@ -16,6 +15,5 @@ initRegional()
     <MainCommon>
       <RouterView />
     </MainCommon>
-    <FooterCommon></FooterCommon>
   </LayoutWrapper>
 </template>
