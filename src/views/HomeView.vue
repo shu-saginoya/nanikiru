@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useRegionalsStore } from '@/store/regionals'
 import { useForecastStore } from '@/store/forecast'
 import { useJmaForecast } from '@/composables/jma/useJmaForecast'
-import { useRegionFormat } from '@/composables/utils/useRegionFormat'
+import { useTexts } from '@/composables/utils/useTexts'
 import { useDay } from '@/composables/utils/useDay'
 import ArticleStateArea from '@/components/molecules/ArticleStateArea.vue'
 import ArticleCard from '@/components/molecules/ArticleCard.vue'
@@ -12,7 +12,7 @@ import SectionForecast from '@/components/molecules/SectionForecast.vue'
 
 const { regionalLv1, regionalLv2, regionalLv3 } = storeToRefs(useRegionalsStore())
 const { forecasts, tempArea } = storeToRefs(useForecastStore())
-const { regionFormat } = useRegionFormat()
+const { regionFormat } = useTexts()
 
 const { error } = useJmaForecast()
 if (error.value) {

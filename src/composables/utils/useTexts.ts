@@ -1,4 +1,8 @@
-export const useRegionFormat = () => {
+export const useTexts = () => {
+  const fullSpacesToHalf = (text: string): string => {
+    return text.replace(/\s+/g, ' ')
+  }
+
   const regionFormat = (regionLv1: string, regionLv2: string, regionLv3: string) => {
     if (regionLv2 !== regionLv3) {
       return `${regionLv2} ${regionLv3}`
@@ -8,6 +12,7 @@ export const useRegionFormat = () => {
   }
 
   return {
+    fullSpacesToHalf,
     regionFormat
   }
 }
