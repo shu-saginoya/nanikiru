@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useRegionalsStore } from '@/store/regionals'
 import { useForecastStore } from '@/store/forecast'
 import { useFetch } from '@/composables/utils/useFetch'
-import { useDateFormat } from '../utils/useDateFormat'
+import { useDay } from '@/composables/utils/useDay'
 import type { ForecastList, AreaTypeA } from '@/types/jmaForecast'
 
 export const useJmaForecast = () => {
@@ -86,7 +86,7 @@ export const useJmaForecast = () => {
     })
   }
   const compareDates = (dateA: string, dateB: string) => {
-    return useDateFormat(dateA).format === useDateFormat(dateB).format
+    return useDay(dateA).formatYMD === useDay(dateB).formatYMD
   }
 
   return {

@@ -5,7 +5,7 @@ import { useRegionalsStore } from '@/store/regionals'
 import { useForecastStore } from '@/store/forecast'
 import { useJmaForecast } from '@/composables/jma/useJmaForecast'
 import { useRegionFormat } from '@/composables/utils/useRegionFormat'
-import { useDateFormat } from '@/composables/utils/useDateFormat'
+import { useDay } from '@/composables/utils/useDay'
 import ArticleStateArea from '@/components/molecules/ArticleStateArea.vue'
 import ArticleCard from '@/components/molecules/ArticleCard.vue'
 import SectionForecast from '@/components/molecules/SectionForecast.vue'
@@ -33,7 +33,7 @@ const region = computed(() => {
   </ArticleStateArea>
   <ArticleCard v-for="forecast in forecasts" :key="forecast.date">
     <SectionForecast
-      :date="useDateFormat(forecast.date).formatJa"
+      :date="useDay(forecast.date).formatJa"
       :minTemp="forecast.minTemp"
       :maxTemp="forecast.maxTemp"
       :weather="forecast.weather"
