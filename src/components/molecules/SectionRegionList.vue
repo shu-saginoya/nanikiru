@@ -3,7 +3,7 @@ type Item = {
   key: string
   name: string
 }
-const props = defineProps<{
+defineProps<{
   items: Item[]
   clickAction: (key: string, name: string) => void
   prevAction?: () => void
