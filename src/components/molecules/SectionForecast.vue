@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { watchEffect } from 'vue'
 import { useTempClass } from '@/composables/utils/useTempClass'
-import { useTextFormat } from '@/composables/utils/useTextFormat'
+import { useTexts } from '@/composables/utils/useTexts'
 import DivTemps from '@/components/molecules/DivTemps.vue'
 import DivClothing from './DivClothing.vue'
 
@@ -9,14 +9,17 @@ const props = defineProps<{
   date?: string
   minTemp?: number
   maxTemp?: number
+  averageTemp?: number
   weather?: string
 }>()
 
 const { clothing, color, image, setTemp } = useTempClass()
-const { fullSpacesToHalf } = useTextFormat()
+const { fullSpacesToHalf } = useTexts()
 
 watchEffect(() => {
-  setTemp(Number(props.maxTemp))
+  if (props.averageTemp) {
+    setTemp(props.averageTemp)
+  }
 })
 </script>
 

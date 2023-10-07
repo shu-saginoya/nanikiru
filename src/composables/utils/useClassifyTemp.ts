@@ -1,7 +1,7 @@
 import type { TempClass } from '@/types/tempClass'
 
 export const useClassifyTemp = () => {
-  const temps: number[] = [5, 8, 12, 16, 20, 25, 28, 30]
+  const temps: number[] = [5, 8, 12, 16, 20, 25, 28]
   const tempClass = (temp: number): TempClass => {
     if (temp > temps[6]) {
       return 8

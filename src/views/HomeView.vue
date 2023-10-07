@@ -36,6 +36,7 @@ const region = computed(() => {
       :date="useDay(forecast.date).formatJa"
       :minTemp="forecast.minTemp"
       :maxTemp="forecast.maxTemp"
+      :averageTemp="forecast.averageTemp"
       :weather="forecast.weather"
     ></SectionForecast>
   </ArticleCard>

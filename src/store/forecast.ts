@@ -12,6 +12,7 @@ export const useForecastStore = defineStore('forecast', () => {
     weather: string
     minTemp: number | undefined
     maxTemp: number
+    averageTemp: number
   }
   type Forecasts = Forecast[]
 

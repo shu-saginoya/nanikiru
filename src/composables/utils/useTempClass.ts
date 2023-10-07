@@ -43,10 +43,11 @@ export const useTempClass = () => {
     'fashion_tshirt1_white.png'
   ]
 
-  const setTemp = (temp: number) => {
-    clothing.value = clothings[tempClass(temp)]
-    color.value = colors[tempClass(temp)]
-    image.value = images[tempClass(temp)]
+  const setTemp = (averageTemp: number) => {
+    const number = tempClass(averageTemp)
+    clothing.value = clothings[number]
+    color.value = colors[number]
+    image.value = images[number]
   }
 
   return {

@@ -7,8 +7,8 @@ defineProps<{
 
 <template>
   <div class="flex justify-center items-center font-bold">
-    <div v-if="minTemp === maxTemp" class="text-gray-300 tracking-tighter">
-      <span>--</span>
+    <div v-if="!minTemp" class="text-gray-300 tracking-tighter">
+      <span>-</span>
     </div>
     <div v-else class="text-blue-300 tracking-tighter">
       <span class="text-6xl font-roboto">{{ minTemp }}</span>
