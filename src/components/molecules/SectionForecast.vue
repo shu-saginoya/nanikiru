@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { watchEffect } from 'vue'
+import { computed, watchEffect } from 'vue'
 import { useTempClass } from '@/composables/utils/useTempClass'
 import { useTexts } from '@/composables/utils/useTexts'
+import { useDay } from '@/composables/utils/useDay'
 import DivTemps from '@/components/molecules/DivTemps.vue'
-import DivClothing from './DivClothing.vue'
+import DivClothing from '@/components/molecules/DivClothing.vue'
+import SpanChip from '@/components/atoms/SpanChip.vue'
 
 const props = defineProps<{
-  date?: string
+  date: string
   minTemp?: number
   maxTemp?: number
   averageTemp?: number
@@ -15,6 +17,10 @@ const props = defineProps<{
 
 const { clothing, color, image, setTemp } = useTempClass()
 const { fullSpacesToHalf } = useTexts()
+
+const dateFormat = computed(() => useDay(props.date).formatJa)
+const today = computed(() => useDay('now').formatJa)
+const tomorrow = computed(() => useDay('tomorrow').formatJa)
 
 watchEffect(() => {
   if (props.averageTemp) {
@@ -25,7 +31,11 @@ watchEffect(() => {
 
 <template>
   <section v-if="date && maxTemp && weather" class="flex flex-col gap-1">
-    <p>{{ date }}</p>
+    <p>
+      <SpanChip v-if="today === dateFormat" color="rose">きょう</SpanChip>
+      <SpanChip v-if="tomorrow === dateFormat" color="pink">あした</SpanChip>
+      {{ dateFormat }}
+    </p>
     <hr />
     <DivTemps :minTemp="minTemp" :maxTemp="maxTemp"></DivTemps>
     <DivClothing :clothing="clothing" :image="image" :color="color"></DivClothing>
