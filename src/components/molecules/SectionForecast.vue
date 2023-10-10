@@ -24,7 +24,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <section v-if="date && minTemp && maxTemp && weather" class="flex flex-col gap-1">
+  <section v-if="date && maxTemp && weather" class="flex flex-col gap-1">
     <p>{{ date }}</p>
     <hr />
     <DivTemps :minTemp="minTemp" :maxTemp="maxTemp"></DivTemps>
