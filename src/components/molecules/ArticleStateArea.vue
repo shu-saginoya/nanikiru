@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <article class="flex items-center justify-center gap-2 py-4 max-w-xl w-full m-auto">
+  <article class="flex items-center justify-center gap-2 py-2 max-w-xl w-full m-auto">
     <div class="text-lg">
       <p v-if="region">{{ region }}</p>
       <p v-else>地域が選択されていません</p>
