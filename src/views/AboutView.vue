@@ -2,6 +2,7 @@
 import ArticleCard from '@/components/molecules/ArticleCard.vue'
 import LinkRouter from '@/components/atoms/LinkRouter.vue'
 import IconBack from '@/components/icons/IconBack.vue'
+import { version } from '../../package.json'
 </script>
 
 <template>
@@ -29,6 +30,12 @@ import IconBack from '@/components/icons/IconBack.vue'
       <p>
         また、アプリ内のアイコンについてはTailwind
         Toolboxから利用しています。https://www.tailwindtoolbox.com/icons
+      </p>
+    </section>
+    <section>
+      <h3 class="font-bold">バージョン情報</h3>
+      <p>
+        {{ version }}
       </p>
     </section>
     <section class="text-center">
