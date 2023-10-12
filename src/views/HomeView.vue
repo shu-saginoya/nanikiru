@@ -51,7 +51,7 @@ const areaName = computed(() => {
         :date="forecast.date"
         :minTemp="forecast.minTemp"
         :maxTemp="forecast.maxTemp"
-        :averageTemp="forecast.averageTemp"
+        :minTempNextDay="forecast.minTempNextDay"
         :weather="forecast.weather"
       ></SectionForecast>
     </ArticleCard>

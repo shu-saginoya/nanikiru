@@ -57,14 +57,14 @@ export const useJmaForecast = () => {
             weather: weathers[weathersDateNum(0)],
             minTemp: temps[0] !== temps[1] ? Number(temps[0]) : undefined,
             maxTemp: Number(temps[1]),
-            averageTemp: averageTempClac(Number(temps[1]), Number(temps[0]), Number(temps[2]))
+            minTempNextDay: Number(temps[2])
           },
           {
             date: tempsDate[2],
             weather: weathers[weathersDateNum(2)],
             minTemp: Number(temps[2]),
             maxTemp: Number(temps[3]),
-            averageTemp: averageTempClac(Number(temps[3]), Number(temps[2]), Number(temps[4]))
+            minTempNextDay: Number(temps[4])
           }
         ])
       } else {
@@ -74,7 +74,7 @@ export const useJmaForecast = () => {
             weather: weathers[0],
             minTemp: temps[0] !== temps[1] ? Number(temps[0]) : undefined,
             maxTemp: Number(temps[1]),
-            averageTemp: averageTempClac(Number(temps[1]), Number(temps[0]), Number(temps[2]))
+            minTempNextDay: Number(temps[2])
           }
         ])
       }
@@ -90,21 +90,6 @@ export const useJmaForecast = () => {
   }
   const compareDates = (dateA: string, dateB: string) => {
     return useDay(dateA).formatYMD === useDay(dateB).formatYMD
-  }
-  const averageTempClac = (
-    maxTemp: number,
-    minTemp1: number | undefined,
-    minTemp2: number | undefined
-  ) => {
-    if (minTemp1 && minTemp2) {
-      return (maxTemp + minTemp1 + minTemp2) / 3
-    } else if (minTemp1) {
-      return (maxTemp + minTemp1) / 2
-    } else if (minTemp2) {
-      return (maxTemp + minTemp2) / 2
-    } else {
-      return maxTemp
-    }
   }
 
   return {
