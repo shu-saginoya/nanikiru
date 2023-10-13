@@ -1,21 +1,25 @@
 <script setup lang="ts">
-import ImgDefult from '@/components/atoms/ImgDefult.vue'
-import SpanChip from '@/components/atoms/SpanChip.vue'
+import { watchEffect } from 'vue'
+import { useTempClass } from '@/composables/temps/useTempClass'
+import AImg from '@/components/elements/AImg.vue'
+import AChip from '@/components/elements/AChip.vue'
 import IconPlus from '@/components/icons/IconPlus.vue'
 
-defineProps<{
-  color?: string
-  clothing?: string[]
-  clothingImg?: string
-  outerwear?: string[]
-  outerwearImg?: string
+const props = defineProps<{
+  maxTemp: number
+  minTemps: number[]
 }>()
+
+const { color, clothing, clothingImg, outerwear, outerwearImg, setTemp } = useTempClass()
+watchEffect(() => {
+  setTemp(props.maxTemp, props.minTemps)
+})
 </script>
 
 <template>
-  <div v-if="clothing && clothingImg && outerwear && outerwearImg" class="flex justify-center">
+  <div class="flex justify-center">
     <figure :class="color">
-      <ImgDefult
+      <AImg
         :src="`./images/${clothingImg}`"
         :width="150"
         :height="112"
@@ -23,7 +27,7 @@ defineProps<{
         objectPosition="center"
       />
       <figcaption>
-        <SpanChip color="slate-dark">服装の目安</SpanChip>
+        <AChip color="slate-dark">服装の目安</AChip>
         <p v-for="(item, index) in clothing" :key="index">{{ item }}</p>
       </figcaption>
     </figure>
@@ -31,7 +35,7 @@ defineProps<{
       <IconPlus :class="color" />
     </div>
     <figure :class="color">
-      <ImgDefult
+      <AImg
         :src="`./images/${outerwearImg}`"
         :width="150"
         :height="112"
@@ -39,11 +43,9 @@ defineProps<{
         objectPosition="center"
       />
       <figcaption>
-        <SpanChip color="slate">朝・夕</SpanChip>
+        <AChip color="slate">朝・夕</AChip>
         <p v-for="(item, index) in outerwear" :key="index">{{ item }}</p>
       </figcaption>
     </figure>
   </div>
-
-  <p v-else>服装の取得に失敗しました。</p>
 </template>

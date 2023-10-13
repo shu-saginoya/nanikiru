@@ -27,7 +27,7 @@ const colorStyle = computed(() => {
 
 <template>
   <span
-    class="inline-block text-white px-1.5 align-text-bottom rounded-2xl text-sm tracking-tight"
+    class="inline-block text-white px-1.5 rounded-2xl text-sm tracking-tight"
     :class="colorStyle"
   >
     <slot />

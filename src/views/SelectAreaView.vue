@@ -2,13 +2,14 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useJmaArea } from '@/composables/jma/useJmaArea'
 import { useAreasStore } from '@/store/areas'
+import { useJmaArea } from '@/composables/jma/useJmaArea'
 import { useVisibleSeveral } from '@/composables/utils/useVisibleSeveral'
-import ArticleCard from '@/components/molecules/ArticleCard.vue'
-import SectionAreaList from '@/components/molecules/SectionAreaList.vue'
-import LinkRouter from '@/components/atoms/LinkRouter.vue'
 import IconBack from '@/components/icons/IconBack.vue'
+import ACard from '@/components/elements/ACard.vue'
+import ALink from '@/components/elements/ALink.vue'
+import AHeadingLv2 from '@/components/elements/AHeadingLv2.vue'
+import SectionAreaList from '@/components/templates/SectionAreaList.vue'
 
 const { centers, offices, class10s, error } = useJmaArea()
 const { areaLv1, areaLv2 } = storeToRefs(useAreasStore())
@@ -63,19 +64,17 @@ const selectAction3 = (key: string, name: string) => {
 </script>
 
 <template>
-  <ArticleCard v-if="error">
-    <h2 class="text-lg font-bold">エラーが発生しました</h2>
-    <p class="text-left">地域情報を取得できませんでした。</p>
-    <p class="text-left">
-      なにかしらの通信障害の可能性があります。しばらく時間をおいてから再度お試しください。
-    </p>
-    <LinkRouter to="/" class="rounded-sm">
+  <ACard v-if="error">
+    <AHeadingLv2>エラーが発生しました</AHeadingLv2>
+    <p>地域情報を取得できませんでした。</p>
+    <p>なにかしらの通信障害の可能性があります。しばらく時間をおいてから再度お試しください。</p>
+    <ALink to="/">
       <div class="flex"><IconBack />もどる</div>
-    </LinkRouter>
-  </ArticleCard>
+    </ALink>
+  </ACard>
   <template v-else>
-    <h2>いちばん近い地域を選んでください</h2>
-    <ArticleCard>
+    <AHeadingLv2>いちばん近い地域を選んでください</AHeadingLv2>
+    <ACard>
       <SectionAreaList v-show="visible === 0" :items="centerItems" :click-action="selectAction1">
       </SectionAreaList>
       <SectionAreaList
@@ -92,6 +91,6 @@ const selectAction3 = (key: string, name: string) => {
         :prev-action="prev"
       >
       </SectionAreaList>
-    </ArticleCard>
+    </ACard>
   </template>
 </template>

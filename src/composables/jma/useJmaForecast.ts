@@ -4,7 +4,9 @@ import { useAreasStore } from '@/store/areas'
 import { useForecastStore } from '@/store/forecast'
 import { useFetch } from '@/composables/utils/useFetch'
 import { useDay } from '@/composables/utils/useDay'
+import { useTexts } from '@/composables/utils/useTexts'
 import type { ForecastList, AreaTypeA } from '@/types/jmaForecast'
+const { fullSpacesToHalf } = useTexts()
 
 export const useJmaForecast = () => {
   // グローバルステートを取得
@@ -30,7 +32,8 @@ export const useJmaForecast = () => {
       if (areaLv3.value) {
         findArea(weathersList, areaLv3.value.key)
       }
-      const weathers = weathersList[areaNum.value].weathers
+      const weathersOriginal = weathersList[areaNum.value].weathers
+      const weathers = weathersOriginal.map((value) => fullSpacesToHalf(value))
       const tempsDate = latestForecast.timeSeries[2].timeDefines
       const tempsList = latestForecast.timeSeries[2].areas
       const temps = tempsList[0].temps

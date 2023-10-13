@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
+  maxTemp: number
   minTemp?: number
-  maxTemp?: number
 }>()
 </script>
 
