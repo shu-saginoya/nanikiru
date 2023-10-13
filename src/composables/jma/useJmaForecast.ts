@@ -1,6 +1,6 @@
 import { ref, watchEffect } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRegionalsStore } from '@/store/regionals'
+import { useAreasStore } from '@/store/areas'
 import { useForecastStore } from '@/store/forecast'
 import { useFetch } from '@/composables/utils/useFetch'
 import { useDay } from '@/composables/utils/useDay'
@@ -8,12 +8,12 @@ import type { ForecastList, AreaTypeA } from '@/types/jmaForecast'
 
 export const useJmaForecast = () => {
   // グローバルステートを取得
-  const { regionalLv2, regionalLv3 } = storeToRefs(useRegionalsStore())
+  const { areaLv2, areaLv3 } = storeToRefs(useAreasStore())
   const { setForecasts, setTempArea } = useForecastStore()
 
   // 気象庁天気予報のアクセスポイントにアクセス
   const accessPoint = 'https://www.jma.go.jp/bosai/forecast/data/forecast/'
-  const key = regionalLv2.value ? regionalLv2.value.key : '130000'
+  const key = areaLv2.value ? areaLv2.value.key : '130000'
   const url = accessPoint + key + '.json'
   const { data, error } = useFetch(url)
 
@@ -27,8 +27,8 @@ export const useJmaForecast = () => {
       const latestForecast = forecast[0]
       const weathersDate = latestForecast.timeSeries[0].timeDefines
       const weathersList = latestForecast.timeSeries[0].areas
-      if (regionalLv3.value) {
-        findRegion(weathersList, regionalLv3.value.key)
+      if (areaLv3.value) {
+        findArea(weathersList, areaLv3.value.key)
       }
       const weathers = weathersList[areaNum.value].weathers
       const tempsDate = latestForecast.timeSeries[2].timeDefines
@@ -81,7 +81,7 @@ export const useJmaForecast = () => {
     }
   })
 
-  const findRegion = (items: AreaTypeA[], key: string): void => {
+  const findArea = (items: AreaTypeA[], key: string): void => {
     items.find((value, index) => {
       if (value.area.code === key) {
         areaNum.value = index

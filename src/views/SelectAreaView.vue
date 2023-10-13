@@ -3,16 +3,16 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useJmaArea } from '@/composables/jma/useJmaArea'
-import { useRegionalsStore } from '@/store/regionals'
+import { useAreasStore } from '@/store/areas'
 import { useVisibleSeveral } from '@/composables/utils/useVisibleSeveral'
 import ArticleCard from '@/components/molecules/ArticleCard.vue'
-import SectionRegionList from '@/components/molecules/SectionRegionList.vue'
+import SectionAreaList from '@/components/molecules/SectionAreaList.vue'
 import LinkRouter from '@/components/atoms/LinkRouter.vue'
 import IconBack from '@/components/icons/IconBack.vue'
 
 const { centers, offices, class10s, error } = useJmaArea()
-const { regionalLv1, regionalLv2 } = storeToRefs(useRegionalsStore())
-const { setRegionalLv1, setRegionalLv2, setRegionalLv3 } = useRegionalsStore()
+const { areaLv1, areaLv2 } = storeToRefs(useAreasStore())
+const { setAreaLv1, setAreaLv2, setAreaLv3 } = useAreasStore()
 const { visible, next, prev } = useVisibleSeveral()
 const router = useRouter()
 
@@ -29,7 +29,7 @@ const officesItems = computed(() => {
   const result = []
   if (offices.value) {
     for (const key in offices.value) {
-      if (offices.value[key].parent === regionalLv1.value?.key) {
+      if (offices.value[key].parent === areaLv1.value?.key) {
         result.push({ key: key, name: offices.value[key].name })
       }
     }
@@ -40,7 +40,7 @@ const class10sItems = computed(() => {
   const result = []
   if (class10s.value) {
     for (const key in class10s.value) {
-      if (class10s.value[key].parent === regionalLv2.value?.key) {
+      if (class10s.value[key].parent === areaLv2.value?.key) {
         result.push({ key: key, name: class10s.value[key].name })
       }
     }
@@ -49,15 +49,15 @@ const class10sItems = computed(() => {
 })
 
 const selectAction1 = (key: string, name: string) => {
-  setRegionalLv1(key, name)
+  setAreaLv1(key, name)
   next()
 }
 const selectAction2 = (key: string, name: string) => {
-  setRegionalLv2(key, name)
+  setAreaLv2(key, name)
   next()
 }
 const selectAction3 = (key: string, name: string) => {
-  setRegionalLv3(key, name)
+  setAreaLv3(key, name)
   router.push('/')
 }
 </script>
@@ -76,22 +76,22 @@ const selectAction3 = (key: string, name: string) => {
   <template v-else>
     <h2>いちばん近い地域を選んでください</h2>
     <ArticleCard>
-      <SectionRegionList v-show="visible === 0" :items="centerItems" :click-action="selectAction1">
-      </SectionRegionList>
-      <SectionRegionList
+      <SectionAreaList v-show="visible === 0" :items="centerItems" :click-action="selectAction1">
+      </SectionAreaList>
+      <SectionAreaList
         v-show="visible === 1"
         :items="officesItems"
         :click-action="selectAction2"
         :prev-action="prev"
       >
-      </SectionRegionList>
-      <SectionRegionList
+      </SectionAreaList>
+      <SectionAreaList
         v-show="visible === 2"
         :items="class10sItems"
         :click-action="selectAction3"
         :prev-action="prev"
       >
-      </SectionRegionList>
+      </SectionAreaList>
     </ArticleCard>
   </template>
 </template>

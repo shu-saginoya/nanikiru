@@ -15,9 +15,9 @@ const router = createRouter({
       component: () => import('@/views/AboutView.vue')
     },
     {
-      path: '/select-regional',
-      name: 'select-regional',
-      component: () => import('@/views/SelectRegionalView.vue')
+      path: '/select-area',
+      name: 'select-area',
+      component: () => import('@/views/SelectAreaView.vue')
     }
   ]
 })

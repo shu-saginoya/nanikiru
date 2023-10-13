@@ -3,16 +3,16 @@ export const useTexts = () => {
     return text.replace(/\s+/g, ' ')
   }
 
-  const regionFormat = (regionLv1: string, regionLv2: string, regionLv3: string) => {
-    if (regionLv2 !== regionLv3) {
-      return `${regionLv2} ${regionLv3}`
+  const areaFormat = (areaLv1: string, areaLv2: string, areaLv3: string) => {
+    if (areaLv2 !== areaLv3) {
+      return `${areaLv2} ${areaLv3}`
     } else {
-      return `${regionLv1} ${regionLv2}`
+      return `${areaLv1} ${areaLv2}`
     }
   }
 
   return {
     fullSpacesToHalf,
-    regionFormat
+    areaFormat
   }
 }
