@@ -50,6 +50,7 @@ export const useAreasStore = defineStore('areas', () => {
       areaLv3.value = jsonParse[2]
     }
   }
+
   const saveArea = (): void => {
     if (isSetAll.value) {
       const jsonData = JSON.stringify(areaList.value)
@@ -58,6 +59,9 @@ export const useAreasStore = defineStore('areas', () => {
       console.error('地域を全て入力してください')
     }
   }
+
+  // Init
+  initArea()
 
   return {
     areaLv1: readonly(areaLv1),
