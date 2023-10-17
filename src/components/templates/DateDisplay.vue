@@ -14,8 +14,8 @@ const tomorrow = computed(() => useDay('tomorrow').formatJa)
 
 <template>
   <div>
-    <AChip v-if="today === dateFormat" color="amber">きょう</AChip>
-    <AChip v-if="tomorrow === dateFormat" color="pink">あした</AChip>
+    <AChip v-if="today === dateFormat" class="bg-orange-300">きょう</AChip>
+    <AChip v-if="tomorrow === dateFormat" class="bg-yellow-300">あした</AChip>
     {{ dateFormat }}
   </div>
 </template>

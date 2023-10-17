@@ -27,7 +27,7 @@ watchEffect(() => {
         objectPosition="center"
       />
       <figcaption>
-        <AChip color="slate-dark">服装の目安</AChip>
+        <AChip class="bg-neutral-500">服装の目安</AChip>
         <p v-for="(item, index) in clothing" :key="index">{{ item }}</p>
       </figcaption>
     </figure>
@@ -43,7 +43,7 @@ watchEffect(() => {
         objectPosition="center"
       />
       <figcaption>
-        <AChip color="slate">朝・夕</AChip>
+        <AChip class="bg-neutral-300">朝・夕</AChip>
         <p v-for="(item, index) in outerwear" :key="index">{{ item }}</p>
       </figcaption>
     </figure>
