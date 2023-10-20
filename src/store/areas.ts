@@ -28,17 +28,10 @@ export const useAreasStore = defineStore('areas', () => {
   })
 
   // Actions
-  const setAreaLv1 = (key: string, name: string) => {
-    areaLv1.value = { key, name }
-    areaLv2.value = undefined
-    areaLv3.value = undefined
-  }
-  const setAreaLv2 = (key: string, name: string) => {
-    areaLv2.value = { key, name }
-    areaLv3.value = undefined
-  }
-  const setAreaLv3 = (key: string, name: string) => {
-    areaLv3.value = { key, name }
+  const setArea = (lv1: Area, lv2: Area, lv3: Area) => {
+    areaLv1.value = lv1
+    areaLv2.value = lv2
+    areaLv3.value = lv3
     saveArea()
   }
   const initArea = (): void => {
@@ -50,13 +43,10 @@ export const useAreasStore = defineStore('areas', () => {
       areaLv3.value = jsonParse[2]
     }
   }
-
   const saveArea = (): void => {
     if (isSetAll.value) {
       const jsonData = JSON.stringify(areaList.value)
       set(jsonData)
-    } else {
-      console.error('地域を全て入力してください')
     }
   }
 
@@ -68,9 +58,7 @@ export const useAreasStore = defineStore('areas', () => {
     areaLv2: readonly(areaLv2),
     areaLv3: readonly(areaLv3),
     isSetAll,
-    setAreaLv1,
-    setAreaLv2,
-    setAreaLv3,
+    setArea,
     initArea
   }
 })

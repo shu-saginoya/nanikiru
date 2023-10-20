@@ -23,7 +23,13 @@ defineProps<{
         </button>
       </li>
       <li v-if="prevAction">
-        <button type="button" @click="prevAction()">もどる</button>
+        <button
+          type="button"
+          class="w-full text-left p-1 hover:bg-gray-100 focus:bg-gray-100"
+          @click="prevAction()"
+        >
+          もどる
+        </button>
       </li>
     </ul>
   </section>

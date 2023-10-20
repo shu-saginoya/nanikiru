@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia'
 import { useAreasStore } from '@/store/areas'
 import { useJmaArea } from '@/composables/jma/useJmaArea'
 import { useVisibleSeveral } from '@/composables/utils/useVisibleSeveral'
@@ -12,10 +11,17 @@ import AHeadingLv2 from '@/components/elements/AHeadingLv2.vue'
 import SectionAreaList from '@/components/templates/SectionAreaList.vue'
 
 const { centers, offices, class10s, error } = useJmaArea()
-const { areaLv1, areaLv2 } = storeToRefs(useAreasStore())
-const { setAreaLv1, setAreaLv2, setAreaLv3 } = useAreasStore()
+const { setArea } = useAreasStore()
 const { visible, next, prev } = useVisibleSeveral()
 const router = useRouter()
+
+type Area = {
+  key: string
+  name: string
+}
+const areaLv1 = ref<Area>()
+const areaLv2 = ref<Area>()
+const areaLv3 = ref<Area>()
 
 const centerItems = computed(() => {
   const result = []
@@ -50,16 +56,21 @@ const class10sItems = computed(() => {
 })
 
 const selectAction1 = (key: string, name: string) => {
-  setAreaLv1(key, name)
+  areaLv1.value = { key, name }
   next()
 }
 const selectAction2 = (key: string, name: string) => {
-  setAreaLv2(key, name)
+  areaLv2.value = { key, name }
   next()
 }
 const selectAction3 = (key: string, name: string) => {
-  setAreaLv3(key, name)
-  router.push('/')
+  areaLv3.value = { key, name }
+  if (areaLv1.value && areaLv2.value && areaLv3.value) {
+    setArea(areaLv1.value, areaLv2.value, areaLv3.value)
+    router.push('/')
+  } else {
+    console.error('エラー：地域情報のセットに失敗しました。')
+  }
 }
 </script>
 
@@ -73,9 +84,14 @@ const selectAction3 = (key: string, name: string) => {
     </ALink>
   </ACard>
   <template v-else>
-    <AHeadingLv2>いちばん近い地域を選んでください</AHeadingLv2>
+    <p class="text-center">いちばん近い地域を選んでください</p>
     <ACard>
-      <SectionAreaList v-show="visible === 0" :items="centerItems" :click-action="selectAction1">
+      <SectionAreaList
+        v-show="visible === 0"
+        :items="centerItems"
+        :click-action="selectAction1"
+        :prev-action="() => router.push('/')"
+      >
       </SectionAreaList>
       <SectionAreaList
         v-show="visible === 1"
