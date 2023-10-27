@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import HeaderCommon from '@/components/templates/HeaderCommon.vue'
-import MainCommon from '@/components/templates/MainCommon.vue'
+import CommonWrapper from '@/components/templates/CommonWrapper.vue'
+import CommonHeader from '@/components/templates/CommonHeader.vue'
+import CommonMain from '@/components/templates/CommonMain.vue'
 </script>
 
 <template>
-  <div class="bg-gray-100 h-screen w-screen">
-    <div class="h-full flex flex-col">
-      <HeaderCommon>Nanikiru?</HeaderCommon>
-      <MainCommon>
-        <RouterView />
-      </MainCommon>
-    </div>
-  </div>
+  <CommonWrapper>
+    <CommonHeader />
+    <CommonMain>
+      <RouterView />
+    </CommonMain>
+  </CommonWrapper>
 </template>
