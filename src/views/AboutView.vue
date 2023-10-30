@@ -2,59 +2,22 @@
 import ACard from '@/components/elements/ACard.vue'
 import AContainer from '@/components/elements/AContainer.vue'
 import AHeadingLv2 from '@/components/elements/AHeadingLv2.vue'
-import AHeadingLv3 from '@/components/elements/AHeadingLv3.vue'
-import ALink from '@/components/elements/ALink.vue'
-import IconBack from '@/components/icons/IconBack.vue'
-import { version } from '../../package.json'
+import SectionAbout from '@/components/implications/SectionAbout.vue'
+import SectionNotes from '@/components/implications/SectionNotes.vue'
+import SectionReference from '@/components/implications/SectionReference.vue'
+import SectionVersion from '@/components/implications/SectionVersion.vue'
+import SectionReturnHome from '@/components/implications/SectionReturnHome.vue'
 </script>
 
 <template>
   <ACard>
     <AContainer>
-      <section>
-        <AHeadingLv2>Nanikiru? について</AHeadingLv2>
-        <p>幼いこどもに保育園や幼稚園に着せていく服を選ぶのって難しいですよね？</p>
-        <p>
-          特に春や秋は気温が意外と暑かったり、寒かったりで毎日気温をチェックして、服装を考えるのは手間がかかります。
-        </p>
-        <p>
-          このアプリはそんな忙しい親御さんのために、一目で気温と服装の目安がわかるように開発されました。
-        </p>
-        <p>もちろん、おとなの方のお洋服選びにもご利用ください。</p>
-        <p>ぜひ、スマホのディスクトップにブックマークして役立ててください。</p>
-      </section>
-      <section>
-        <AHeadingLv3>ご注意</AHeadingLv3>
-        <p>服装の提案ロジックについては現在調整中となっておりますのでお気をつけください。</p>
-        <p>また、現在のところ子供向けの設定のためやや薄着の傾向となっています。</p>
-        <p>
-          より最適な提案ができるように改善するとともに、今後のアップデートで個人ごとに微調整できる機能の実装も考えております。
-        </p>
-      </section>
-      <section>
-        <AHeadingLv3>利用させていただいている技術について</AHeadingLv3>
-        <p>
-          このアプリケーションは気象庁ホームページの情報を取得し、利用させていただいております。（気温と天気の予想・地域の分類）https://www.jma.go.jp/
-        </p>
-        <p>
-          また、衣類のイラストは「いらすとや」から利用させていただきました。https://www.irasutoya.com/
-        </p>
-        <p>
-          また、アプリ内のアイコンについてはTailwind
-          Toolboxから利用しています。https://www.tailwindtoolbox.com/icons
-        </p>
-      </section>
-      <section>
-        <AHeadingLv3>バージョン情報</AHeadingLv3>
-        <p>
-          {{ version }}
-        </p>
-      </section>
-      <section class="text-center">
-        <ALink to="/">
-          <div class="flex"><IconBack />もどる</div>
-        </ALink>
-      </section>
+      <AHeadingLv2>About</AHeadingLv2>
+      <SectionAbout />
+      <SectionNotes />
+      <SectionReference />
+      <SectionVersion />
+      <SectionReturnHome />
     </AContainer>
   </ACard>
 </template>
