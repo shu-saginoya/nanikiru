@@ -1,0 +1,8 @@
+.markdown-body {
+  > h2 {
+    @apply text-lg font-bold;
+  }
+  > h3 {
+    @apply font-bold;
+  }
+}
