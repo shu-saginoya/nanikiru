@@ -15,18 +15,20 @@ if (error.value) {
 </script>
 
 <template>
-  <ACard v-if="error">
-    <AcquisitionError />
-  </ACard>
-  <template v-else>
-    <ACard v-for="forecast in forecasts" :key="forecast.date">
-      <BlockForecast
-        :date="forecast.date"
-        :minTemp="forecast.minTemp"
-        :maxTemp="forecast.maxTemp"
-        :minTempNextDay="forecast.minTempNextDay"
-        :weather="forecast.weather"
-      ></BlockForecast>
+  <section class="flex flex-col gap-4">
+    <ACard v-if="error">
+      <AcquisitionError />
     </ACard>
-  </template>
+    <template v-else>
+      <ACard v-for="forecast in forecasts" :key="forecast.date">
+        <BlockForecast
+          :date="forecast.date"
+          :minTemp="forecast.minTemp"
+          :maxTemp="forecast.maxTemp"
+          :minTempNextDay="forecast.minTempNextDay"
+          :weather="forecast.weather"
+        ></BlockForecast>
+      </ACard>
+    </template>
+  </section>
 </template>

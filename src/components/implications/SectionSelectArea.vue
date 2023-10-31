@@ -75,38 +75,40 @@ const selectAction3 = (key: string, name: string) => {
 </script>
 
 <template>
-  <ACard v-if="error">
-    <AHeadingLv2>エラーが発生しました</AHeadingLv2>
-    <p>地域情報を取得できませんでした。</p>
-    <p>なにかしらの通信障害の可能性があります。しばらく時間をおいてから再度お試しください。</p>
-    <ALink to="/">
-      <div class="flex"><IconBack />もどる</div>
-    </ALink>
-  </ACard>
-  <template v-else>
-    <p class="text-center">いちばん近い地域を選んでください</p>
-    <ACard>
-      <BlockAreaList
-        v-show="visible === 0"
-        :items="centerItems"
-        :click-action="selectAction1"
-        :prev-action="() => router.push('/')"
-      >
-      </BlockAreaList>
-      <BlockAreaList
-        v-show="visible === 1"
-        :items="officesItems"
-        :click-action="selectAction2"
-        :prev-action="prev"
-      >
-      </BlockAreaList>
-      <BlockAreaList
-        v-show="visible === 2"
-        :items="class10sItems"
-        :click-action="selectAction3"
-        :prev-action="prev"
-      >
-      </BlockAreaList>
+  <section>
+    <ACard v-if="error">
+      <AHeadingLv2>エラーが発生しました</AHeadingLv2>
+      <p>地域情報を取得できませんでした。</p>
+      <p>なにかしらの通信障害の可能性があります。しばらく時間をおいてから再度お試しください。</p>
+      <ALink to="/">
+        <div class="flex"><IconBack />もどる</div>
+      </ALink>
     </ACard>
-  </template>
+    <template v-else>
+      <p class="text-center">いちばん近い地域を選んでください</p>
+      <ACard>
+        <BlockAreaList
+          v-show="visible === 0"
+          :items="centerItems"
+          :click-action="selectAction1"
+          :prev-action="() => router.push('/')"
+        >
+        </BlockAreaList>
+        <BlockAreaList
+          v-show="visible === 1"
+          :items="officesItems"
+          :click-action="selectAction2"
+          :prev-action="prev"
+        >
+        </BlockAreaList>
+        <BlockAreaList
+          v-show="visible === 2"
+          :items="class10sItems"
+          :click-action="selectAction3"
+          :prev-action="prev"
+        >
+        </BlockAreaList>
+      </ACard>
+    </template>
+  </section>
 </template>

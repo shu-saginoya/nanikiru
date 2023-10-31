@@ -27,5 +27,7 @@ const areaName = computed(() => {
 </script>
 
 <template>
-  <BlockCurrentlyArea :area="area" :areaName="areaName"> </BlockCurrentlyArea>
+  <section>
+    <BlockCurrentlyArea :area="area" :areaName="areaName"> </BlockCurrentlyArea>
+  </section>
 </template>
