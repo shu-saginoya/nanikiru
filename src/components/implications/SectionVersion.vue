@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import AHeadingLv3 from '@/components/elements/AHeadingLv3.vue'
+import AHeadingLv2 from '@/components/elements/AHeadingLv2.vue'
 import { version } from '../../../package.json'
 </script>
 
 <template>
   <section>
-    <AHeadingLv3>バージョン情報</AHeadingLv3>
+    <AHeadingLv2>バージョン情報</AHeadingLv2>
     <p>
       {{ version }}
     </p>
