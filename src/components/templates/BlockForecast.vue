@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import BlockTemps from '@/components/templates/BlockTemps.vue'
-import BlockClothingSuggestions from '@/components/templates/BlockClothingSuggestions.vue'
+import BlockClothing from '@/components/templates/BlockClothing.vue'
 import BlockWeather from '@/components/templates/BlockWeather.vue'
 import BlockDate from '@/components/templates/BlockDate.vue'
 
@@ -30,7 +30,7 @@ const minTemps = computed(() => {
     <BlockDate :date="date"> </BlockDate>
     <hr />
     <BlockTemps :maxTemp="maxTemp" :minTemp="minTemp"></BlockTemps>
-    <BlockClothingSuggestions :maxTemp="maxTemp" :minTemps="minTemps"></BlockClothingSuggestions>
+    <BlockClothing :maxTemp="maxTemp" :minTemps="minTemps"></BlockClothing>
     <BlockWeather :sentence="weather"> </BlockWeather>
   </section>
 </template>
