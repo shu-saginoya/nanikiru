@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex items-center justify-center gap-2 py-2">
+  <div class="flex items-center justify-center gap-2">
     <div class="text-center">
       <p class="text-lg">{{ area }}</p>
       <p v-if="areaName" class="text-sm">予想気温の基準地：{{ areaName }}</p>
