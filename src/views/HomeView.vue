@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import SectionCurrentlyArea from '@/components/implications/SectionCurrentlyArea.vue'
-import SectionForecastList from '@/components/implications/SectionForecastList.vue'
+import SectionCurrentlyArea from '@/components/contents/SectionCurrentlyArea.vue'
+import SectionForecastList from '@/components/contents/SectionForecastList.vue'
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SectionSelectArea from '@/components/implications/SectionSelectArea.vue'
+import SectionSelectArea from '@/components/contents/SectionSelectArea.vue'
 </script>
 
 <template>
