@@ -28,7 +28,7 @@ export const useAreasStore = defineStore('areas', () => {
   })
 
   // Actions
-  const setArea = (lv1: Area, lv2: Area, lv3: Area) => {
+  const setArea = (lv1: Area, lv2: Area, lv3: Area): void => {
     areaLv1.value = lv1
     areaLv2.value = lv2
     areaLv3.value = lv3
