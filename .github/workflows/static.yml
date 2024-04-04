@@ -1,4 +1,4 @@
-# Viteの公式ページを参考に
+# Vite公式サイト参考
 # 静的コンテンツを GitHub Pages にデプロイするためのシンプルなワークフロー
 name: Deploy static content to Pages
 
