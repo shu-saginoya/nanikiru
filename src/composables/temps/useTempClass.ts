@@ -1,89 +1,105 @@
 import { ref } from 'vue'
 import { useClassifyTemp } from '@/composables/temps/useClassifyTemp'
 import { useTempCalc } from '@/composables/temps/useTempCalc'
+import type { TempClassObject } from '@/types/tempClass'
 
 const { tempClass } = useClassifyTemp()
 
 export const useTempClass = () => {
-  const color = ref<string>()
-  const colors: string[] = [
-    'text-gray-500',
-    'text-indigo-500',
-    'text-blue-500',
-    'text-sky-500',
-    'text-teal-500',
-    'text-green-500',
-    'text-lime-500',
-    'text-orange-500',
-    'text-red-500'
-  ]
+  const color = ref<string>('text-gray-500')
+  const colors: TempClassObject = {
+    boiling: 'text-red-500',
+    melting: 'text-orange-500',
+    humid: 'text-lime-500',
+    hot: 'text-green-500',
+    warm: 'text-teal-500',
+    cool: 'text-sky-500',
+    chilly: 'text-blue-500',
+    cold: 'text-indigo-500',
+    freezing: 'text-violet-500'
+  }
 
-  const clothing = ref<string[]>()
-  const clothings: string[][] = [
-    ['-'],
-    ['トレーナー', '長ズボン'],
-    ['トレーナー', '長ズボン'],
-    ['トレーナー', '長ズボン'],
-    ['長袖シャツ', '長ズボン'],
-    ['長袖シャツ', '長ズボン'],
-    ['半袖シャツ', '長袖シャツ', '七分丈ズボン'],
-    ['半袖シャツ', '半ズボン', '七分丈ズボン'],
-    ['半袖シャツ', '半ズボン', '七分丈ズボン']
-  ]
+  const tops = ref<string>()
+  const topsList: TempClassObject = {
+    boiling: '半袖シャツ',
+    melting: '半袖シャツ',
+    humid: '半袖シャツ',
+    hot: '長袖シャツ',
+    warm: '長袖シャツ',
+    cool: '長袖シャツ',
+    chilly: 'トレーナー',
+    cold: 'トレーナー',
+    freezing: 'トレーナー'
+  }
+
+  const bottoms = ref<string>()
+  const bottomsList: TempClassObject = {
+    boiling: '半ズボン',
+    melting: '半ズボン',
+    humid: '半ズボン',
+    hot: '七分丈ズボン',
+    warm: '七分丈ズボン',
+    cool: '長ズボン',
+    chilly: '長ズボン',
+    cold: '厚手の長ズボン',
+    freezing: '厚手の長ズボン'
+  }
 
   const clothingImg = ref<string>()
-  const clothingImgs: string[] = [
-    '',
-    'kodomofuku_boy.png',
-    'kodomofuku_boy.png',
-    'kodomofuku_boy.png',
-    'cloth_longt.png',
-    'cloth_longt.png',
-    'kids_kodomofuku_shirt_boy.png',
-    'kids_kodomofuku_shirt_boy.png',
-    'kids_kodomofuku_shirt_boy.png'
-  ]
+  const clothingImgList: TempClassObject = {
+    boiling: 'kids_kodomofuku_shirt_boy.png',
+    melting: 'kids_kodomofuku_shirt_boy.png',
+    humid: 'kids_kodomofuku_shirt_boy.png',
+    hot: 'cloth_longt.png',
+    warm: 'cloth_longt.png',
+    cool: 'cloth_longt.png',
+    chilly: 'kodomofuku_boy.png',
+    cold: 'kodomofuku_boy.png',
+    freezing: 'kodomofuku_boy.png'
+  }
 
-  const outerwear = ref<string[]>()
-  const outerwears: string[][] = [
-    ['-'],
-    ['ダウンジャケット', '手袋', 'ニット帽'],
-    ['ダウンジャケット'],
-    ['ウインドブレーカー'],
-    ['ウインドブレーカー'],
-    ['薄い羽織'],
-    ['薄い羽織'],
-    ['帽子'],
-    ['帽子', '日傘']
-  ]
+  const outerwear = ref<string>()
+  const outerwearList: TempClassObject = {
+    boiling: '帽子や日傘',
+    melting: '帽子や日傘',
+    humid: '帽子や日傘',
+    hot: '帽子や日傘',
+    warm: '薄い羽織',
+    cool: 'カーディガン',
+    chilly: 'ウインドブレーカー',
+    cold: 'ダウンジャケット',
+    freezing: 'ダウンジャケット'
+  }
 
   const outerwearImg = ref<string>()
-  const outerwearImgs: string[] = [
-    '',
-    'fashion_down_jacket.png',
-    'fashion_down_jacket.png',
-    'fashion_sutajan.png',
-    'fashion_sutajan.png',
-    'fashion_cardigan_set.png',
-    'fashion_cardigan_set.png',
-    'hiyake_goods.png',
-    'hiyake_goods.png'
-  ]
+  const outerwearImgList: TempClassObject = {
+    boiling: 'hiyake_goods.png',
+    melting: 'hiyake_goods.png',
+    humid: 'hiyake_goods.png',
+    hot: 'hiyake_goods.png',
+    warm: 'fashion_cardigan_set.png',
+    cool: 'fashion_cardigan_set.png',
+    chilly: 'fashion_sutajan.png',
+    cold: 'fashion_down_jacket.png',
+    freezing: 'fashion_down_jacket.png'
+  }
 
   const setTemp = (maxTemp: number, minTemp: number[]) => {
     const { morningAndEveningTemp } = useTempCalc(maxTemp, minTemp)
     const maxTempClass = tempClass(maxTemp)
     const minTempClass = tempClass(morningAndEveningTemp.value)
     color.value = colors[maxTempClass]
-    clothing.value = clothings[maxTempClass]
-    clothingImg.value = clothingImgs[maxTempClass]
-    outerwear.value = outerwears[minTempClass]
-    outerwearImg.value = outerwearImgs[minTempClass]
+    tops.value = topsList[maxTempClass]
+    bottoms.value = bottomsList[maxTempClass]
+    clothingImg.value = clothingImgList[maxTempClass]
+    outerwear.value = outerwearList[minTempClass]
+    outerwearImg.value = outerwearImgList[minTempClass]
   }
 
   return {
     color,
-    clothing,
+    tops,
+    bottoms,
     clothingImg,
     outerwear,
     outerwearImg,
