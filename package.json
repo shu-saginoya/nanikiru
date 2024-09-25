@@ -13,7 +13,7 @@
     "format": "prettier --write src/",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "test:build": "vitest run build.test.js"
+    "test:build": "vitest run build.test.ts"
   },
   "dependencies": {
     "dayjs": "^1.11.10",

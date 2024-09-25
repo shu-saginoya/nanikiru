@@ -1,3 +1,5 @@
+// 気温の分類をもとに服装や表示色などを一括で管理する関数
+
 import { ref } from 'vue'
 import { useClassifyTemp } from '@/composables/temps/useClassifyTemp'
 import { useTempCalc } from '@/composables/temps/useTempCalc'
@@ -5,6 +7,7 @@ import type { TempClassObject } from '@/types/tempClass'
 
 const { tempClass } = useClassifyTemp()
 
+// 気温の分類ごとの色
 export const useTempClass = () => {
   const color = ref<string>('text-gray-500')
   const colors: TempClassObject = {
@@ -19,6 +22,7 @@ export const useTempClass = () => {
     freezing: 'text-violet-500'
   }
 
+  // 気温の分類ごとのトップス
   const tops = ref<string>()
   const topsList: TempClassObject = {
     boiling: '半袖シャツ',
@@ -32,6 +36,7 @@ export const useTempClass = () => {
     freezing: 'トレーナー'
   }
 
+  // 気温の分類ごとのボトムス
   const bottoms = ref<string>()
   const bottomsList: TempClassObject = {
     boiling: '半ズボン',
@@ -45,6 +50,7 @@ export const useTempClass = () => {
     freezing: '厚手の長ズボン'
   }
 
+  // 気温の分類ごとの表示画像
   const clothingImg = ref<string>()
   const clothingImgList: TempClassObject = {
     boiling: 'kids_kodomofuku_shirt_boy.png',
@@ -58,6 +64,7 @@ export const useTempClass = () => {
     freezing: 'kodomofuku_boy.png'
   }
 
+  // 気温の分類ごとのアウター
   const outerwear = ref<string>()
   const outerwearList: TempClassObject = {
     boiling: '帽子や日傘',
@@ -71,6 +78,7 @@ export const useTempClass = () => {
     freezing: 'ダウンジャケット'
   }
 
+  // 気温の分類ごとのアウターの表示画像
   const outerwearImg = ref<string>()
   const outerwearImgList: TempClassObject = {
     boiling: 'hiyake_goods.png',
@@ -84,6 +92,7 @@ export const useTempClass = () => {
     freezing: 'fashion_down_jacket.png'
   }
 
+  // 最高気温と最低気温から各項目を更新する関数
   const setTemp = (maxTemp: number, minTemp: number[]) => {
     const { morningAndEveningTemp } = useTempCalc(maxTemp, minTemp)
     const maxTempClass = tempClass(maxTemp)
