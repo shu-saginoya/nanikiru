@@ -1,3 +1,5 @@
+// 天気予報を管理するストア
+
 import { defineStore } from 'pinia'
 import { ref, readonly } from 'vue'
 
@@ -14,14 +16,15 @@ export const useForecastStore = defineStore('forecast', () => {
     maxTemp: number
     minTempNextDay: number | undefined
   }
-  type Forecasts = Forecast[]
 
   // State
+  // 地域
   const tempArea = ref<TempArea | undefined>()
-  const forecasts = ref<Forecasts | undefined>()
+  // 天気予報のリスト
+  const forecasts = ref<Forecast[] | undefined>()
 
   // Setter
-  const setForecasts = (list: Forecasts): void => {
+  const setForecasts = (list: Forecast[]): void => {
     forecasts.value = list
   }
   const setTempArea = (name: string, code: string) => {

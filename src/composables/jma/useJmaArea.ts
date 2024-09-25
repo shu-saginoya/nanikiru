@@ -1,3 +1,5 @@
+// 地域情報を管理
+
 import { ref, watch, readonly } from 'vue'
 import { useFetch } from '@/composables/utils/useFetch'
 
@@ -11,9 +13,13 @@ import type {
 } from '@/types/jmaAreas'
 
 export const useJmaArea = () => {
+  // エリアの情報を公開しているURL
   const url = 'https://www.jma.go.jp/bosai/common/const/area.json'
+
+  // 取得できたデータ
   const { data, error } = useFetch(url)
 
+  //取得したデータを分割
   const centers = ref<AreaCenters>()
   const offices = ref<AreaOffices>()
   const class10s = ref<AreaClass10s>()
